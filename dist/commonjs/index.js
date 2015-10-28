@@ -3,9 +3,6 @@
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
-exports.startsWithSegment = startsWithSegment;
-exports.endsWithSegment = endsWithSegment;
-exports.includesSegment = includesSegment;
 var dotOrEnd = '(\\..+$|$)';
 var dotOrStart = '(^.+\\.|^)';
 
@@ -21,14 +18,26 @@ function normaliseSegment(name) {
     return name.replace('.', '\\.');
 }
 
-function startsWithSegment(route, segment) {
-    return test(route, new RegExp('^' + normaliseSegment(segment) + dotOrEnd));
+function testRouteWithSegment(before, after) {
+    return function () {
+        var route = arguments[0];
+
+        function applySegment(segment) {
+            return test(route, new RegExp(before + normaliseSegment(segment) + after));
+        };
+
+        if (arguments.length === 2) {
+            return applySegment(arguments[1]);
+        }
+
+        return applySegment;
+    };
 }
 
-function endsWithSegment(route, segment) {
-    return test(route, new RegExp(dotOrStart + normaliseSegment(segment) + '$'));
-}
+var startsWithSegment = testRouteWithSegment('^', dotOrEnd);
+var endsWithSegment = testRouteWithSegment(dotOrStart, '$');
+var includesSegment = testRouteWithSegment(dotOrStart, dotOrEnd);
 
-function includesSegment(route, segment) {
-    return test(route, new RegExp(dotOrStart + normaliseSegment(segment) + dotOrEnd));
-}
+exports.startsWithSegment = startsWithSegment;
+exports.endsWithSegment = endsWithSegment;
+exports.includesSegment = includesSegment;
