@@ -18,7 +18,7 @@ _route can be a route name (string) or state object containing a name property_
 - __endsWithSegment(route)(segment)__
 - __includesSegment(route)(segment)__
 
-```
+```javascript
 import * as helpers from 'router5.helpers';
 
 startsWithSegment('users', 'users');      // => true
