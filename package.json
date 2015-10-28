@@ -1,0 +1,38 @@
+{
+  "name": "router5.helpers",
+  "version": "1.0.0",
+  "description": "Router5 helpers for comparing and checking routes",
+  "main": "dist/commonjs/index.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "_mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/router5/helpers.git"
+  },
+  "keywords": [
+    "router5",
+    "helpers"
+  ],
+  "author": "Thomas Roch <thomas.c.roch@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/router5/helpers/issues"
+  },
+  "homepage": "https://router5.github.io",
+  "devDependencies": {
+    "mocha": "^2.3.3",
+    "should": "^7.1.1",
+    "babel": "^5.8.19",
+    "babel-eslint": "^3.1.26",
+    "del": "^2.0.2",
+    "eslint": "^0.24.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.3.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.2",
+    "run-sequence": "^1.1.4"
+  }
+}
