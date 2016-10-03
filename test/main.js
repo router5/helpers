@@ -1,6 +1,6 @@
-require('should');
+var should = require('should');
 require('mocha');
-var helpers = require('../dist/commonjs');
+var helpers = require('../index.js');
 
 describe('router5.helpers', function () {
     describe('.startsWithSegment()', function () {
@@ -43,6 +43,22 @@ describe('router5.helpers', function () {
             helpers.includesSegment('a.bb.c', 'a.b').should.equal(false);
             helpers.includesSegment('a.b.c', 'bb.c').should.equal(false);
             helpers.includesSegment('a.b.c', 'a.b.b').should.equal(false);
+        });
+    });
+
+    describe('.redirect()', function () {
+        it('should return a "redirect" error if node is matched', function () {
+            helpers.redirect('a', 'b')()({ name: 'a' }, null, function done(err) {
+                err.should.eql({
+                    redirect: { name: 'b' }
+                })
+            });
+        });
+
+        it('should not return a "redirect" error if node is not matched', function () {
+            helpers.redirect('a', 'b')()({ name: 'b' }, null, function done(err) {
+                should.not.exist(err);
+            });
         });
     });
 });
